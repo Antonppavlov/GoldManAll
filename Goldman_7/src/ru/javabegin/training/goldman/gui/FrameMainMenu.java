@@ -19,7 +19,7 @@ public class FrameMainMenu extends javax.swing.JFrame {
     private FrameStat frameStat = new FrameStat();
     private FrameSavedGames frameLoadGame = new FrameSavedGames();
     
-    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "game.map", new MapCollection());
+    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "C:\\Users\\Антон\\IdeaProjects\\GoldManAll\\Goldman_7\\src\\ru\\javabegin\\training\\goldman\\images\\game.map", new MapCollection());
     
 
     /**

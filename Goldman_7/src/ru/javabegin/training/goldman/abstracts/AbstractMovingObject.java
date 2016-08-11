@@ -23,8 +23,8 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
         this.step = step;
     }
 
+    //метод изменяет иконку
     protected void actionBeforeMove(MovingDirection direction) {
-
         // при движении объект должен сменить иконку и произвести звук
         changeIcon(direction);
 //        playSound(); на будушее
@@ -32,24 +32,28 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     }
 
     @Override
-    public ActionResult moveToObject(MovingDirection direction, AbstractGameObject gameObject) {
+    public ActionResult  moveToObject(MovingDirection direction, AbstractGameObject gameObject) {
+        //отрисовка действия
         actionBeforeMove(direction);
+        //результат действия
         return doAction(gameObject);
     }
 
-    public ActionResult doAction(AbstractGameObject gameObject) {
 
+    public ActionResult doAction(AbstractGameObject gameObject) {
+//если gameObject == null   происходит если край карты
+        // то вернуть NO_ACTION т.е не делать действия
         if (gameObject == null) { // край карты
             return ActionResult.NO_ACTION;
         }
-
+//свич с типом объекта
         switch (gameObject.getType()) {
-
+// если впереди пустота вернуть MOVE
             case NOTHING: {
                 return ActionResult.MOVE;
             }
         }
-
+//если ничего из перечисленного то ничего не делать
         return ActionResult.NO_ACTION;
     }
 }

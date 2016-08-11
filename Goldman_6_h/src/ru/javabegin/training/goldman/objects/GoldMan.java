@@ -51,7 +51,10 @@ public class GoldMan extends AbstractMovingObject {
                 break;
         }
     }
-
+      // super.setIconRight("/resources/images/goldman_right.png");
+      // super.setIconLeft("/resources/images/goldman_left.png");
+      // super.setIconUp("/resources/images/goldman_up.png");
+      // super.setIconDown("/resources/images/goldman_down.png");
    
 
 

@@ -55,17 +55,27 @@ public class MapCollection implements GameCollection {// объекты для �
 
     @Override
     public void moveObject(MovingDirection direction, GameObjectType gameObjectType) {
+
+        //цикл для всех объектов этого типа в EnumMap GameObjects
         for (AbstractGameObject gameObject : this.getGameObjects(gameObjectType)) {
+            //если этот объект наследуется от абстрактного класса AbstractMovingObject то
             if (gameObject instanceof AbstractMovingObject) {// дорогостоящая операция - instanceof
+
+                //привести его к AbstractMovingObject, сделать ссылку movingObject и сослаться на этот объект
                 AbstractMovingObject movingObject = (AbstractMovingObject) gameObject;
-
+                //получить новую кординату отравив в метод getNewCoordinate направление и объект
                 Coordinate newCoordinate = getNewCoordinate(direction, movingObject);
-
+                //сделать ссылку на объект хранящийся в этой координате
                 AbstractGameObject objectInNewCoordinate = getObjectByCoordinate(newCoordinate);
-
+                //получение результата движение параметром из енума ActionResult
+                //для этого в объекте movingObject.вызываю метот moveToObject и передаю в него направление и коориданыты объекта который находится на координатам
+                //направление передаётся для смены картинки
                 ActionResult actionResult = movingObject.moveToObject(direction, objectInNewCoordinate);
 
+                //свич по результатм
                 switch (actionResult) {
+                    //если результатом является движение то перадть два объета в метод swapObjects
+                    //который поменяет их местами
                     case MOVE: {
                         swapObjects(movingObject, objectInNewCoordinate);
                         break;
@@ -78,14 +88,14 @@ public class MapCollection implements GameCollection {// объекты для �
     }
 
     private void swapObjects(AbstractGameObject obj1, AbstractGameObject obj2) {
-
+//метод меняет ссылки на объекты "координаты" местами
         swapCoordinates(obj1, obj2);
-
+//добавляем в gameObjects новые объекты по координатам (заменяем)
         gameObjects.put(obj1.getCoordinate(), obj1);
         gameObjects.put(obj2.getCoordinate(), obj2);
 
     }
-
+    //метод меняет ссылки на объекты "координаты" местами
     private void swapCoordinates(AbstractGameObject obj1, AbstractGameObject obj2) {
         Coordinate tmpCoordinate = obj1.getCoordinate();
         obj1.setCoordinate(obj2.getCoordinate());
